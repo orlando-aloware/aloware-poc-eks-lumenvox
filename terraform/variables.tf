@@ -51,7 +51,7 @@ variable "kubernetes_version" {
 variable "node_instance_types" {
   description = "Instance types for EKS node groups"
   type        = list(string)
-  default     = ["t3.medium"]
+  default     = ["t3.xlarge"]
 }
 
 variable "node_desired_capacity" {
@@ -63,7 +63,7 @@ variable "node_desired_capacity" {
 variable "node_min_size" {
   description = "Minimum number of nodes in the node group"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "node_max_size" {
@@ -75,5 +75,5 @@ variable "node_max_size" {
 variable "node_disk_size" {
   description = "Disk size in GB for worker nodes"
   type        = number
-  default     = 50
+  default     = 20
 }

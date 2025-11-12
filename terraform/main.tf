@@ -18,6 +18,7 @@ module "eks" {
   # Enable IRSA (IAM Roles for Service Accounts)
   enable_irsa = true
 
+
   # Complete addon configuration
   addons = {
     coredns = {
@@ -27,6 +28,9 @@ module "eks" {
       most_recent = true
     }
     vpc-cni = {
+      most_recent = true
+    }
+    aws-efs-csi-driver = {
       most_recent = true
     }
   }
@@ -44,8 +48,8 @@ module "eks" {
       instance_types = var.node_instance_types
       # capacity_type  = "ON_DEMAND"
 
-      ami_type             = "AL2023_x86_64_STANDARD"
-      # disk_size            = var.node_disk_size
+      ami_type  = "AL2_x86_64"
+      disk_size = var.node_disk_size
 
       subnet_ids = module.vpc.private_subnets
 
