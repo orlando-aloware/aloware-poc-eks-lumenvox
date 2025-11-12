@@ -45,26 +45,19 @@ module "efs" {
 
   # Access point(s)
   access_points = {
-    posix_example = {
-      name = "posix-example"
-      posix_user = {
-        gid            = 1001
-        uid            = 1001
-        secondary_gids = [1002]
-      }
-
-      tags = {
-        Additionl = "yes"
-      }
-    }
-    root_example = {
+    lumenvox = {
+      name = "lumenvox"
       root_directory = {
-        path = "/example"
+        path = "/lumenvox"
         creation_info = {
           owner_gid   = 1001
           owner_uid   = 1001
           permissions = "755"
         }
+      }
+      posix_user = {
+        gid            = 1001
+        uid            = 1001
       }
     }
   }
