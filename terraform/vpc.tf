@@ -16,17 +16,17 @@ module "vpc" {
 
   enable_nat_gateway = true
 
-  #   # Required tags for EKS public subnets for external load balancers
-  #   public_subnet_tags = {
-  #     "kubernetes.io/role/elb"                    = "1"
-  #     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
-  #   }
+  # Required tags for EKS public subnets for external load balancers
+  public_subnet_tags = {
+    "kubernetes.io/role/elb"                    = "1"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+  }
 
-  #   # Required tags for EKS private subnets for internal load balancers
-  #   private_subnet_tags = {
-  #     "kubernetes.io/role/internal-elb"           = "1"
-  #     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
-  #   }
+  # Required tags for EKS private subnets for internal load balancers
+  private_subnet_tags = {
+    "kubernetes.io/role/internal-elb"           = "1"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+  }
 
   tags = {
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"

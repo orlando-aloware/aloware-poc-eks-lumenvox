@@ -19,19 +19,42 @@ module "eks" {
   enable_irsa = true
 
   # Complete addon configuration
+  # VPC CNI must be created and active before node groups
   addons = {
-    coredns = {
-      most_recent = true
+    vpc-cni = {
+      most_recent                 = true
+      before_compute              = true
+      resolve_conflicts_on_create = "OVERWRITE"
+      resolve_conflicts_on_update = "OVERWRITE"
+      configuration_values = jsonencode({
+        env = {
+          ENABLE_PREFIX_DELEGATION = "true"
+          WARM_PREFIX_TARGET       = "1"
+        }
+      })
     }
     kube-proxy = {
-      most_recent = true
+      most_recent                 = true
+      before_compute              = true
+      resolve_conflicts_on_create = "OVERWRITE"
+      resolve_conflicts_on_update = "OVERWRITE"
     }
-    vpc-cni = {
-      most_recent = true
+    coredns = {
+      most_recent                 = true
+      resolve_conflicts_on_create = "OVERWRITE"
+      resolve_conflicts_on_update = "OVERWRITE"
     }
     aws-efs-csi-driver = {
-      most_recent = true
+      most_recent                 = true
+      resolve_conflicts_on_create = "OVERWRITE"
+      resolve_conflicts_on_update = "OVERWRITE"
     }
+  }
+
+  # Ensure addons have enough time to become active
+  addons_timeouts = {
+    create = "30m"
+    update = "30m"
   }
 
   # Comprehensive node group configuration
