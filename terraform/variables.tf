@@ -1,7 +1,7 @@
 variable "region" {
   description = "AWS region for all resources"
   type        = string
-  default     = "us-west-2"
+  default     = "us-east-1"
 }
 
 variable "environment" {
@@ -51,7 +51,7 @@ variable "kubernetes_version" {
 variable "node_instance_types" {
   description = "Instance types for EKS node groups"
   type        = list(string)
-  default     = ["t3.xlarge"]
+  default     = ["m6a.2xlarge"]
 }
 
 variable "node_desired_capacity" {
